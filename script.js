@@ -29,6 +29,7 @@ function playRound(playerSelection, computerSelection){
     let rock = "ROCK";
     let paper = "PAPER";
     let scissors = "SCISSORS";
+
     // Player wins
     if ((playerSelection == rock && computerSelection == scissors) || (playerSelection == scissors && computerSelection == paper) || (playerSelection == paper && computerSelection == rock)){
         return `You win! ${playerSelection} beats ${computerSelection}.`;
@@ -49,11 +50,14 @@ function game(){
     let computerWins = 0;
     let userWins = 0;
 
-    // Play 5 rounds
-    for (i = 0; i < 3; i++){
-        let roundResult = playRound(userPlay(), computerPlay());
+    if (userPlay() == 'QUIT'){
+        return;
+    }
 
+    // Play 5 rounds
+    for (i = 0; i < 5; i++){      
         // Tally up each round winner
+        let roundResult = playRound(userPlay(), computerPlay());
         if (roundResult.includes("You win")){
             userWins += 1;
         }
@@ -61,8 +65,9 @@ function game(){
             computerWins += 1;
         }
         // Print result of each round
-        console.log(roundResult);
+        console.log(roundResult);  
     }
+   
 
     // Print final winner
     console.log(determineWinner(userWins, computerWins));
