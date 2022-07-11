@@ -23,23 +23,65 @@ function userPlay(){
     }
 }
 // console.log(userPlay());
-// let computerWins = 0;
-// let userWins = 0;
 
 // Play a single round
 function playRound(playerSelection, computerSelection){
     let rock = "ROCK";
     let paper = "PAPER";
     let scissors = "SCISSORS";
+    // Player wins
     if ((playerSelection == rock && computerSelection == scissors) || (playerSelection == scissors && computerSelection == paper) || (playerSelection == paper && computerSelection == rock)){
         return `You win! ${playerSelection} beats ${computerSelection}.`;
     }
+    // Computer wins
     else if((playerSelection == scissors && computerSelection == rock) || (playerSelection == paper && computerSelection == scissors) || (playerSelection == rock && computerSelection == paper)){
         return `You lose! ${computerSelection} beats ${playerSelection}.`;
     }
+    // Tie
     else {
         return `A tie! ${playerSelection} and ${computerSelection}.`;
     }
 }
+// console.log(playRound(userPlay(), computerPlay()));
 
-console.log(playRound(userPlay(), computerPlay()));
+// Play multiple rounds
+function game(){
+    let computerWins = 0;
+    let userWins = 0;
+
+    // Play 5 rounds
+    for (i = 0; i < 3; i++){
+        let roundResult = playRound(userPlay(), computerPlay());
+
+        // Tally up each round winner
+        if (roundResult.includes("You win")){
+            userWins += 1;
+        }
+        else if (roundResult.includes("You lose")){
+            computerWins += 1;
+        }
+        // Print result of each round
+        console.log(roundResult);
+    }
+
+    // Print final winner
+    console.log(determineWinner(userWins, computerWins));
+    
+}
+
+// Provide game winner
+function determineWinner (userWins, computerWins){
+    let gameResult = `You: ${userWins}. Computer: ${computerWins}.`;
+    if (userWins > computerWins){
+        return gameResult + " Congratulations, you win!";
+    }
+    else if (userWins < computerWins) {
+        return gameResult + " Better luck next time!";
+    }
+    else {
+        return gameResult + " It's a tie!";
+    }
+}
+
+// Play the game
+game();
