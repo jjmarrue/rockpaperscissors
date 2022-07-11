@@ -13,15 +13,24 @@ function computerPlay(){
 
 // User's turn
 function userPlay(){
-    let userChoice = prompt("Please enter 'Rock', 'Paper', or 'Scissors' ");
-    if (userChoice != null) {
-        return userChoice.toUpperCase();
-    }
-    else {
-        userChoice = 'QUIT';
-        return userChoice;
-    }
+    let proceed = false;
+    while (!proceed){
+        userChoice = prompt("Please enter 'Rock', 'Paper', or 'Scissors' ");
+        if (userChoice != null) {
+            userChoice = userChoice.toUpperCase();
+            if (userChoice == "ROCK"|| userChoice == "PAPER"|| userChoice == "SCISSORS"){
+                proceed = true;
+                return userChoice;
+            }
+        }
+        else {
+            userChoice = 'QUIT';
+            proceed = true;
+            return userChoice;
+        }
+    }  
 }
+    
 // console.log(userPlay());
 
 // Play a single round
@@ -50,14 +59,17 @@ function game(){
     let computerWins = 0;
     let userWins = 0;
 
-    if (userPlay() == 'QUIT'){
-        return;
-    }
-
     // Play 5 rounds
-    for (i = 0; i < 5; i++){      
+    for (i = 0; i < 5; i++){    
+        userValue = userPlay();
+        computerValue = computerPlay();
+        if (userValue == 'QUIT'){
+            return;
+        }
+        
+        let roundResult = playRound(userValue, computerValue);
+
         // Tally up each round winner
-        let roundResult = playRound(userPlay(), computerPlay());
         if (roundResult.includes("You win")){
             userWins += 1;
         }
@@ -68,10 +80,8 @@ function game(){
         console.log(roundResult);  
     }
    
-
     // Print final winner
-    console.log(determineWinner(userWins, computerWins));
-    
+    console.log(determineWinner(userWins, computerWins));   
 }
 
 // Provide game winner
