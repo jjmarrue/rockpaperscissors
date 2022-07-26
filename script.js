@@ -1,102 +1,92 @@
 // Rock Paper Scissors mini-game.
-// Author: Juan Mata. July 2022.
-// A learning project for the Odin Project
+// Author: Juan Mata. July 25 2022.
+// A learning project for the Odin Project using HTML5, Flexbox, and Javascript.
 
+let playerScore = 0;
+let computerScore = 0;
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const playerGesture = document.querySelector('#player-gesture');
+const computerGesture = document.querySelector('#computer-gesture');
+const roundResult = document.querySelector('#round-result');
+const playerResult = document.querySelector('#player-result');
+const computerResult = document.querySelector('#computer-result');
+const finalScore = document.querySelector('#final-score');
+const restart = document.querySelector('#restart');
 
-// Computer's turn
-function computerPlay(){
-    const gameChoices = ["ROCK", "PAPER", "SCISSORS"];
-    let computerSelection = Math.floor(Math.random() * gameChoices.length);
-    return gameChoices[computerSelection];
-}
-// console.log(computerPlay());
-
-// User's turn
-function userPlay(){
-    let proceed = false;
-    while (!proceed){
-        userChoice = prompt("Please enter 'Rock', 'Paper', or 'Scissors' ");
-        if (userChoice != null) {
-            userChoice = userChoice.toUpperCase();
-            if (userChoice == "ROCK"|| userChoice == "PAPER"|| userChoice == "SCISSORS"){
-                proceed = true;
-                return userChoice;
-            }
-        }
-        else {
-            userChoice = 'QUIT';
-            proceed = true;
-            return userChoice;
-        }
-    }  
-}
-    
-// console.log(userPlay());
-
-// Play a single round
-function playRound(playerSelection, computerSelection){
-    let rock = "ROCK";
-    let paper = "PAPER";
-    let scissors = "SCISSORS";
-
-    // Player wins
-    if ((playerSelection == rock && computerSelection == scissors) || (playerSelection == scissors && computerSelection == paper) || (playerSelection == paper && computerSelection == rock)){
-        return `You win! ${playerSelection} beats ${computerSelection}.`;
-    }
-    // Computer wins
-    else if((playerSelection == scissors && computerSelection == rock) || (playerSelection == paper && computerSelection == scissors) || (playerSelection == rock && computerSelection == paper)){
-        return `You lose! ${computerSelection} beats ${playerSelection}.`;
-    }
-    // Tie
-    else {
-        return `A tie! ${playerSelection} and ${computerSelection}.`;
-    }
-}
-// console.log(playRound(userPlay(), computerPlay()));
-
-// Play multiple rounds
 function game(){
-    let computerWins = 0;
-    let userWins = 0;
+    rock.addEventListener('click', playRound);
+    paper.addEventListener('click', playRound);
+    scissors.addEventListener('click', playRound);  
 
-    // Play 5 rounds
-    for (i = 0; i < 5; i++){    
-        userValue = userPlay();
-        computerValue = computerPlay();
-        if (userValue == 'QUIT'){
-            return;
-        }
-        
-        let roundResult = playRound(userValue, computerValue);
-
-        // Tally up each round winner
-        if (roundResult.includes("You win")){
-            userWins += 1;
-        }
-        else if (roundResult.includes("You lose")){
-            computerWins += 1;
-        }
-        // Print result of each round
-        console.log(roundResult);  
-    }
-   
-    // Print final winner
-    console.log(determineWinner(userWins, computerWins));   
+    //Allow user to restart the game    
+    restart.addEventListener('click', restartGame);
 }
 
-// Provide game winner
-function determineWinner (userWins, computerWins){
-    let gameResult = `You: ${userWins}. Computer: ${computerWins}.`;
-    if (userWins > computerWins){
-        return gameResult + " Congratulations, you win!";
-    }
-    else if (userWins < computerWins) {
-        return gameResult + " Better luck next time!";
-    }
-    else {
-        return gameResult + " It's a tie!";
+function restartGame(){
+    playerScore = 0;
+    computerScore = 0;
+
+}
+
+function getComputerChoice(){
+    const gameChoices = ["Rock", "Paper", "Scissors"];
+    let computerVal = Math.floor(Math.random() * gameChoices.length);
+    return gameChoices[computerVal];
+}
+
+function playRound(e){
+    let playerSelection = e.target.value;
+    let computerSelection = getComputerChoice();
+    let roundWinner = determineRoundWinner(playerSelection, computerSelection);
+    let gameWinner = trackScore(roundWinner);
+ 
+    playerGesture.textContent = `You: ${playerSelection}`;
+    computerGesture.textContent = `Computer: ${computerSelection}`;
+    roundResult.textContent = roundWinner;
+    playerResult.textContent = `Player score: ${playerScore}`;
+    computerResult.textContent = `Computer score: ${computerScore}`;
+    finalScore.textContent = gameWinner;
+    
+    // End game when score is 5. Disable buttons.
+    if (playerScore === 5 || computerScore === 5){
+        const para = document.createElement('p');
+        const gameOver = document.createTextNode("Game Over");
+        para.appendChild(gameOver);
+        document.querySelector('#final-score').appendChild(para);
     }
 }
 
-// Play the game
+function determineRoundWinner(playerSelection, computerSelection){
+    const rock = "Rock";
+    const paper = "Paper";
+    const scissors = "Scissors";
+    let result ='';
+    if ((playerSelection == rock && computerSelection == scissors) || (playerSelection == scissors && computerSelection == paper) || (playerSelection == paper && computerSelection == rock)){
+        result = `You win! ${playerSelection} beats ${computerSelection}`;
+
+    } else if((playerSelection == scissors && computerSelection == rock) || (playerSelection == paper && computerSelection == scissors) || (playerSelection == rock && computerSelection == paper)){
+        result = `You lose! ${computerSelection} beats ${playerSelection}`;
+
+    } else {
+        result = `It's a Tie! You both chose ${computerSelection}`;
+    }
+    return result;    
+}
+
+function trackScore(result) {
+    if (result.includes('You win')){
+        playerScore++;      
+    } else if (result.includes('You lose')){
+        computerScore++;
+    }
+    if (playerScore === 5) {
+       return 'You win the game!';
+    }
+    if (computerScore === 5){
+        return 'You lose the game!';
+    }
+}
+
 game();

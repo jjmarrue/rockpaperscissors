@@ -4,10 +4,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script type="text/javascript" src="script.js"></script>
+    <title>Rock-Paper-Scissors</title>
+    <script type="text/javascript" src="script.js" defer></script>
 </head>
 <body>
-    
+    <main>
+        <header>
+            <h1 id="main-title" class="title">Play Rock Paper Scissors</h1>
+        </header>
+        <section id="rules" class="content">
+            <h2 class="rule-heading">Rules</h2>
+            <div class="rule-content">
+                <ul class="rules-list">
+                    <li class="item-list">In this version of Rock Paper Scissors, you'll play against the Computer.</li>
+                    <li class="item-list">Each winning round is worth 1 point. The player with 5 points wins the game.</li>
+                    <li class="item-list">Before each round, you must choose which “hand” signal you wish to play.</li>
+                    <li class="item-list">The outcome of a round is determined by 3 simple rules:
+                        <ul class="rules-list">
+                            <li class="item-list">Rock wins against scissors.</li>
+                            <li class="item-list">Scissors win against paper.</li>
+                            <li class="item-list">Paper wins against rock.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section id="game" class="content">
+            <div class="game-intro">
+                <h2>Play</h2>
+                <p>Select a signal to play in this round.</p>
+            </div>
+            <div class="player-gestures">
+                <button type="button" value="Rock" id="rock" class="btn gesture-btn">Rock</button>
+                <button type="button" value="Paper" id="paper" class="btn gesture-btn">Paper</button>
+                <button type="button" value="Scissors" id="scissors" class="btn gesture-btn">Scissors</button>
+            </div>
+            <div class="selection">
+                <div id="player-gesture">Your move: </div>
+                <div id="computer-gesture">Computer move: </div>
+                <div class="score">
+                    <div id="round-result"></div>
+                    <div id="player-result">Your score: </div>
+                    <div id="computer-result">Computer score: </div>
+                    <div id="final-score"></div>
+                </div>
+            </div>
+            <div>
+                <button id="restart" class="btn">Restart</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
 </body>
 </html>
