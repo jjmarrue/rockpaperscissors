@@ -5,57 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors</title>
-    <script type="text/javascript" src="script.js" defer></script>
+    <script type="text/javascript" src="./script.js" defer></script>
+    <link href="./style.css" rel="stylesheet">
 </head>
 <body>
     <main>
-        <header>
-            <h1 id="main-title" class="title">Play Rock Paper Scissors</h1>
+        <header >
+            <h1 id="main-title">Rock Paper Scissors</h1>
+            <p id="sub-title">First to get 5 points wins the game</p>
         </header>
-        <section id="rules" class="content">
-            <h2 class="rule-heading">Rules</h2>
-            <div class="rule-content">
-                <ul class="rules-list">
-                    <li class="item-list">In this version of Rock Paper Scissors, you'll play against the Computer.</li>
-                    <li class="item-list">Each winning round is worth 1 point. The player with 5 points wins the game.</li>
-                    <li class="item-list">Before each round, you must choose which “hand” signal you wish to play.</li>
-                    <li class="item-list">The outcome of a round is determined by 3 simple rules:
-                        <ul class="rules-list">
-                            <li class="item-list">Rock wins against scissors.</li>
-                            <li class="item-list">Scissors win against paper.</li>
-                            <li class="item-list">Paper wins against rock.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </section>
         <section id="game" class="content">
-            <div class="game-intro">
-                <h2>Play</h2>
-                <p>Select a signal to play in this round.</p>
-            </div>
-            <div class="player-gestures">
-                <button type="button" value="Rock" id="rock" class="btn gesture-btn">Rock</button>
-                <button type="button" value="Paper" id="paper" class="btn gesture-btn">Paper</button>
-                <button type="button" value="Scissors" id="scissors" class="btn gesture-btn">Scissors</button>
-            </div>
-            <div class="selection">
-                <div id="player-gesture">Your move: </div>
-                <div id="computer-gesture">Computer move: </div>
-                <div class="score">
-                    <div id="round-result"></div>
-                    <div id="player-result">Your score: </div>
-                    <div id="computer-result">Computer score: </div>
-                    <div id="final-score"></div>
-                </div>
-            </div>
-            <div>
+            <div id="player-buttons">
+                <input type="button" value="Rock" id="rock" class="btn gesture-btn"></input>
+                <input type="button" value="Paper" id="paper" class="btn gesture-btn"></input>
+                <input type="button" value="Scissors" id="scissors" class="btn gesture-btn"></input>                
                 <button id="restart" class="btn">Restart</button>
             </div>
-        </section>
+            <div class="score">
+                <div id="final-score"></div>
+            </div>
+            <div id="animation">
+            <div id="p-gesture"  class="gestures">     
+                <h3>You: <span id="p-score">0</span></h3>
+                <img src="./images/rock.png" class="rock-img" hidden>
+                <img src="./images/paper.png" class="paper-img" hidden>
+                <img src="./images/scissors.png" class="scissors-img" hidden>
+            </div>
+            <div id="c-gesture"  class="gestures">
+                <h3>Computer: <span id="c-score">0</span></h3>
+                <img src="./images/rock.png" class="rock-img" hidden>
+                <img src="./images/paper.png" class="paper-img" hidden>
+                <img src="./images/scissors.png" class="scissors-img" hidden>
+            </div>
+            </div>   
+        </section>      
     </main>
     <footer>
-
+        <p>Copyright &copy; 2022 Made by Juan Mata</p>
+        <p>A personal design for the <a href="https://www.theodinproject.com/" target="_blank">Odin Project</a>.</p>
     </footer>
 </body>
 </html>
