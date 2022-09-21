@@ -15,6 +15,9 @@ body{
   height: 100vh;
   margin: 0 auto;
 }
+main {
+  margin-top: 40px;
+}
 
 #main-title{
   font-size: 3.25rem;
@@ -25,7 +28,7 @@ body{
 .sub-title{
   font-size: 1.15rem;
   text-align: center;
-  padding-top: 16px;
+  padding-top: 14px;
 }
 
 #game{
@@ -91,7 +94,8 @@ body{
 }
 
 .gestures h3{
-  font-size: 1.55rem;
+
+  font-size: 1.5rem;
   font-weight: 100;
 }
 
@@ -101,7 +105,7 @@ body{
 
 .gestures img{
   padding-top: 25px;
-  max-width: 75%;
+  max-width: 65%;
   height: auto;
   flex: 1;
 }
