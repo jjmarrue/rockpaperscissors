@@ -108,7 +108,7 @@ function trackScore(result) {
        return 'You win the game!';
     }
     if (computerScore === 5){
-        return 'Oh no! Better luck next time';
+        return 'Oh no! Better luck next time.';
     }
 }
 
